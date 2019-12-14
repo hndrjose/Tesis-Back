@@ -10,9 +10,9 @@ const myConnection = require('express-myconnection');
 app.use(fileUpload());
 
 const connection = mysql.createConnection({
-    host: 'localhost', // Localhost
+    host: '35.202.222.43', // Localhost,  35.202.222.43
     user: 'root', // root
-    password: 'Ceutec-19', // Ceutec-19
+    password: 'systemas', // Ceutec-19, systemas
     database: 'mypimesdb', //
     multipleStatements: true
 });
