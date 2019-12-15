@@ -101,7 +101,7 @@ app.get('/SelecDataLike/:termino', (req, res) => { //
     const startindex = (page - 1) * limit //  ?page=1&limit=3
     const endindex = page * limit
 
-    const queryString = "SELECT usuario.Iduser, usuario.nombre, usuario.img, usuario.vocacion, dataperfil.competencias, dataperfil.expLaboral FROM usuario INNER JOIN dataperfil ON usuario.Iduser = dataperfil.Iduser WHERE dataperfil.competencias LIKE '%" + req.params.termino + "%' " //  WHERE usuario.vocacion LIKE '%" + req.params.termino + "%'
+    const queryString = "SELECT usuario.Iduser, usuario.nombre, usuario.img, usuario.vocacion, dataperfil.competencias, dataperfil.expLaboral FROM usuario INNER JOIN dataperfil ON usuario.Iduser = dataperfil.Iduser WHERE dataperfil.expLaboral LIKE '%" + req.params.termino + "%' " //  WHERE usuario.vocacion LIKE '%" + req.params.termino + "%'
     connection.query(queryString, (error, rows) => {
         if (error) {
             return res.status(500).json({

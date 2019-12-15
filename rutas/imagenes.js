@@ -61,7 +61,7 @@ app.put('/imagenes/:Id', (req, res, next) => {
     var nombbreArchivo = `${ Id }-${ new Date().getMilliseconds() }.${ extencion }`;
 
     // //mover el archivo del temporal a un path
-    var path = `./src/imagen/${ nombbreArchivo }`;
+    var path = `./imagen/${ nombbreArchivo }`;
     archivo.mv(path, err => {
         if (err) {
             return res.status(500).json({
@@ -86,7 +86,7 @@ function subirarchivo(Id, nombbreArchivo, res) {
             res.end()
             return
         }
-        var pathviejo = './src/imagen/' + rows[0].img;
+        var pathviejo = './imagen/' + rows[0].img;
         console.log(pathviejo);
         //Si exite elimina la imagen anterior
         if (fs.existsSync(pathviejo)) {
