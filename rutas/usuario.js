@@ -49,7 +49,7 @@ app.get('/users', (req, res, next) => {
 app.post('/crearUsuario', (req, res) => {
 
     //Conexion
-    console.log("Tratando de crear un examen nuevo..")
+    console.log("Tratando de crear un usuario nuevo..")
 
     const user = req.body.user
     const password = req.body.password
@@ -83,7 +83,7 @@ app.post('/crearUsuario', (req, res) => {
 app.put('/editarUsuario/:Iduser', (req, res) => {
 
     //Conexion
-    console.log("Tratando de editar una empleado..")
+    console.log("Tratando de editar un registro..")
     console.log("Cedula: " + req.params.Iduser)
 
     const Iduser = req.params.Iduser
@@ -130,7 +130,7 @@ app.delete('/borrarUsuario/:Id', (req, res) => {
 
 //Seleccionar Usuario
 app.get('/SelecionUsuario/:Id', (req, res) => {
-    console.log("Seleccionar empleado con id: " + req.params.Id);
+    console.log("Seleccionar registro con id: " + req.params.Id);
     //Conexion
     const Id = req.params.Id;
     const queryString = "SELECT * FROM usuario WHERE Iduser = ?"
