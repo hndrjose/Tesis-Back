@@ -4,6 +4,8 @@ const app = express();
 const path = require('path');
 
 
+
+
 // default options
 // app.use(fileUpload());
 
@@ -21,9 +23,11 @@ app.use((req, res, next) => {
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 const bodyParser = require('body-parser')
+const configMensaje = require('./nodemailer');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 //server index config
 //sirve para mostrar las imagenes de todas las carpetas dendro del directorio ouploads
@@ -48,6 +52,7 @@ var loginRoutes = require('./rutas/login');
 var imgRoutes = require('./rutas/upload');
 var dataPerfil = require('./rutas/dataPerfil');
 var pedidos = require('./rutas/pedidos');
+var randon = require('./rutas/randon');
 
 
 //  rutas
@@ -56,8 +61,18 @@ app.use('/login', loginRoutes);
 app.use('/img', imgRoutes);
 app.use('/dataperfil', dataPerfil);
 app.use('/pedido', pedidos);
+app.use('/randon', randon);
+
+
+app.post('/formulario', (req, res) => {
+    configMensaje(req.body);
+    res.status(200).send(
+        true
+    );
+})
 
 app.use('/', appRoutes);
+
 
 
 // app.get('/', (req, res) => {

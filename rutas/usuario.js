@@ -157,6 +157,26 @@ app.get('/SelecionUsuario/:Id', (req, res) => {
 });
 
 
+//Seleccionar Usuario
+app.get('/SelecionUser/:user', (req, res) => {
+    console.log("Seleccionar registro con user: " + req.params.user);
+    //Conexion
+    const user = req.params.user;
+    const queryString = "SELECT Iduser FROM usuario WHERE user = ?"
+    connection.query(queryString, [user], (error, rows) => {
+        if (error) {
+            return res.status(500).json({
+                mensaje: "A ocurrido un Error",
+                errors: error
+            });
+        }
+        res.status(200).json({
+            ok: true,
+            usuario: rows
+        });
+    });
+});
+
 //Seleccionar Usuario LIKE
 app.get('/likeusuario/:termino', (req, res) => {
 
@@ -180,7 +200,7 @@ app.get('/likeusuario/:termino', (req, res) => {
         const resultado = rows.slice(startindex, endindex)
         res.status(200).json({
             ok: true,
-            usuarios: (resultado)
+            usuarios: (resultado.length)
         });
 
     });

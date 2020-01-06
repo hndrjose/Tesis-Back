@@ -16,20 +16,20 @@ const connection = mysql.createConnection({
 //////////////////////PROCEDIMIENTOS USUARIOS ////////////////////////////
 
 //Agregar data del Perfil
-app.post('/addDataPerfil/:Iduser', (req, res) => {
+app.post('/addDataPerfil', (req, res) => {
 
     //Conexion
 
 
     const competencias = req.body.competencias
     const expLaboral = req.body.expLaboral
-
+    const conocimientos = req.body.conocimientos
     const Iduser = req.body.Iduser
 
 
     //  VALUES  (? , ? , (SELECT IdEmpleado FROM Empleado WHERE Nombre = ?) ,(SELECT IdProteccion FROM Proteccion WHERE Tipo = ?), (SELECT IdMolestias FROM Molestias WHERE Molestia = ?),(SELECT IdHistoriaCl FROM HistoriaCl WHERE IdEmpleado = ?), (SELECT IdEmpresa FROM Empresa WHERE  Nombre = ?), (SELECT IdAudiometro FROM Audiometro WHERE Modelo = ?))"
-    const queryString = "INSERT INTO dataPerfil (competencias, expLaboral, userId)   VALUES  (?, ?, ?)"
-    connection.query(queryString, [competencias, expLaboral, Iduser], (err, results, fields) => {
+    const queryString = "INSERT INTO dataperfil (competencias, expLaboral, conocimientos, Iduser )   VALUES  (?, ?, ?, ?)"
+    connection.query(queryString, [competencias, expLaboral, conocimientos, Iduser], (err, results, fields) => {
         if (err) {
             console.log("Error al agregar nuevo Registro: " + err)
             res.sendStatus(500)
@@ -53,11 +53,11 @@ app.put('/editarDataPerfil/:Iduser', (req, res) => {
 
     const competencias = req.body.competencias
     const expLaboral = req.body.expLaboral
+    const conocimientos = req.body.conocimientos
+    const Iduser = req.body.Iduser
 
-    const userId = req.body.Iduser
-
-    const queryString = "UPDATE dataPerfil SET competencias = ?, expLaboral = ? WHERE Iduser = ?"
-    connection.query(queryString, [competencias, expLaboral, Iduser], (err, results, fields) => {
+    const queryString = "UPDATE dataperfil SET competencias = ?, expLaboral = ?, conocimientos= ? WHERE Iduser = ?"
+    connection.query(queryString, [competencias, expLaboral, conocimientos, Iduser], (err, results, fields) => {
         if (err) {
             console.log("Error al editar un Registro: " + err)
             res.sendStatus(400)
@@ -76,7 +76,9 @@ app.get('/SelecDataPerfil/:Id', (req, res) => {
     console.log("Seleccionar Registro con id: " + req.params.Id);
     //Conexion
     const Id = req.params.Id;
-    const queryString = "SELECT * FROM dataPerfil WHERE Iduser = ?"
+
+
+    const queryString = "SELECT * FROM dataperfil WHERE Iduser = ?"
     connection.query(queryString, [Id], (error, rows) => {
         if (error) {
             return res.status(500).json({

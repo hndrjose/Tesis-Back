@@ -14,6 +14,7 @@ const connection = mysql.createConnection({
 
 
 app.post('/logUser', (req, res) => {
+    console.log('Intentando Logearme')
     var user = req.body.user
     var password = req.body.password;
 
